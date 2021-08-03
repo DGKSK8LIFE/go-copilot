@@ -12,3 +12,15 @@ func product(a, b int) int {
 func square(a int) int {
 	return a * a
 }
+
+// Write a function that multiples two two-dimensional arrays together and returns the result.
+func multiply(a [][]int, b [][]int) [][]int {
+	result := make([][]int, len(a))
+	for i := range result {
+		result[i] = make([]int, len(a[i]))
+		for j := range result[i] {
+			result[i][j] = a[i][j] * b[i][j]
+		}
+	}
+	return result
+}
