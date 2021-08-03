@@ -1,47 +1,36 @@
-// Write a program that opens a mysql connection
-// and fetches rows from a table using prepared statements.
+// Write a program that opens a MySQL server connection and executes a query on a user table and prints the results.
 package main
 
 import (
 	"database/sql"
 	"fmt"
 	"log"
-	"os"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
-// Execute a prepared statement.
-func execute(stmt *sql.Stmt) {
-	rows, err := stmt.Query()
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer rows.Close()
-
-	for rows.Next() {
-		var id int
-		var name string
-		err = rows.Scan(&id, &name)
-		if err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println(id, name)
-	}
-}
-
 func main() {
-	db, err := sql.Open("mysql", os.Getenv("SQL_DATABASE_USER")+":"+os.Getenv("SQL_DATABASE_PASSWORD")+"@tcp("+os.Getenv("SQL_HOST")+")/"+os.Getenv("SQL_DATABASE"))
+	// Open a connection to the MySQL server
+	db, err := sql.Open("mysql", "user:password@tcp(127.0.0.1:3306)/test")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
 
-	stmt, err := db.Prepare("SELECT id, name FROM users WHERE id = ?")
+	// Execute a query
+	rows, err := db.Query("SELECT * FROM user")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer stmt.Close()
+	defer rows.Close()
 
-	execute(stmt)
+	// Loop through the rows and print the results
+	for rows.Next() {
+		var id int
+		var name string
+		if err := rows.Scan(&id, &name); err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(id, name)
+	}
 }
