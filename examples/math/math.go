@@ -40,3 +40,38 @@ func minimum(a, b int) int {
 	}
 	return b
 }
+
+// Write a function that returns the factorial of the number.
+func factorial(a int) int {
+	if a < 0 {
+		panic("factorial of negative number")
+	}
+	if a == 0 {
+		return 1
+	}
+	return a * factorial(a-1)
+}
+
+// Write a function that returns the sine of the number.
+func sine(a int) int {
+	if a < -90 || a > 90 {
+		panic("sine of out of bounds number")
+	}
+	return int(math.Sin(float64(a) * math.Pi / 180))
+}
+
+// Write a function that returns the cosine of the number.
+func cosine(a int) int {
+	if a < -90 || a > 90 {
+		panic("cosine of out of bounds number")
+	}
+	return int(math.Cos(float64(a) * math.Pi / 180))
+}
+
+// Write a function that returns the tangent of the number.
+func tangent(a int) int {
+	if a < -90 || a > 90 {
+		panic("tangent of out of bounds number")
+	}
+	return int(math.Tan(float64(a) * math.Pi / 180))
+}
