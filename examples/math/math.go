@@ -24,3 +24,19 @@ func multiply(a [][]int, b [][]int) [][]int {
 	}
 	return result
 }
+
+// Write a function that returns the maximum of two numbers.
+func maximum(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+// Write a function that returns the minimum of two numbers.
+func minimum(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
